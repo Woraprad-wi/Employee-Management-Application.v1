@@ -1,0 +1,17 @@
+/* style.css */
+.center-align {
+    text-align: center;
+}
+
+.form-center {
+    margin: 0 auto;
+    width: 50%;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.message {
+    color: green;
+}

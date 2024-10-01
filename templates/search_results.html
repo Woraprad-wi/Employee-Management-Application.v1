@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+</head>
+<body>
+    <h1 style="text-align: center;">Search Results</h1>
+
+    <table border="1" width="100%" cellpadding="5" cellspacing="0">
+        <thead>
+            <tr>
+                <th style="text-align: left;">Name</th>
+                <th style="text-align: left;">Address</th>
+                <th style="text-align: left;">Manager</th>
+                <th style="text-align: left;">Status</th>
+                <th style="text-align: left;">Position</th>
+                <th style="text-align: left;">Salary</th>
+                <th style="text-align: left;">Department</th>
+                <th style="text-align: left;">Image</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if employees %}
+                {% for employee in employees %}
+                <tr>
+                    <td>{{ employee[1] }}</td> <!-- Name -->
+                    <td>{{ employee[2] }}</td> <!-- Address -->
+                    <td>{{ 'Yes' if employee[3] else 'No' }}</td> <!-- Manager -->
+                    <td>{{ employee[4] }}</td> <!-- Status -->
+                    <td>{{ employee[5] }}</td> <!-- Position -->
+                    <td>{{ '{:,.2f}'.format(employee[6]) }}</td> <!-- Salary -->
+                    <td>{{ employee[7] }}</td> <!-- Department -->
+                    <td><img src="{{ employee[8] }}" alt="Employee Image" width="50"></td> <!-- Image -->
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="8" style="text-align: center;">No employees found</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="{{ url_for('employee_list') }}">Back to Employee List</a>
+    </div>
+</body>
+</html>

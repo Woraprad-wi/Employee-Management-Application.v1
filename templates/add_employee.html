@@ -1,0 +1,72 @@
+<!-- templates/add_employee.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <title>Add New Employee</title>
+</head>
+<body>
+    <h1 class="center-align">Add New Employee</h1>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="center-align message">
+                <strong>{{ messages[0] }}</strong>
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <form action="{{ url_for('add_employee') }}" method="POST" class="form-center">
+        <table cellpadding="10" class="full-width">
+            <tr>
+                <td><label for="name">Name:</label></td>
+                <td><input type="text" id="name" name="name" required></td>
+            </tr>
+            <tr>
+                <td><label for="address">Address:</label></td>
+                <td><input type="text" id="address" name="address" required></td>
+            </tr>
+            <tr>
+                <td><label for="manager">Manager:</label></td>
+                <td><input type="checkbox" id="manager" name="manager" value="1"></td>
+            </tr>
+            <tr>
+                <td><label for="status">Status:</label></td>
+                <td>
+                    <select id="status" name="status" required>
+                        <option value="Recruitment process">Recruitment Process</option>
+                        <option value="Waiting for onboarding">Waiting for Onboarding</option>
+                        <option value="In probation period">In Probation Period</option>
+                        <option value="Normal">Normal</option>
+                        <option value="Resigned">Resigned</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="position">Position:</label></td>
+                <td><input type="text" id="position" name="position" required></td>
+            </tr>
+            <tr>
+                <td><label for="salary">Salary:</label></td>
+                <td><input type="text" id="salary" name="salary" required></td>
+            </tr>
+            <tr>
+                <td><label for="department">Department:</label></td>
+                <td><input type="text" id="department" name="department" required></td>
+            </tr>
+            <tr>
+                <td><label for="image">Image URL:</label></td>
+                <td><input type="text" id="image" name="image" required></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="center-align">
+                    <button type="submit">Add Employee</button>
+                    <a href="{{ url_for('employee_list') }}" class="margin-left-20">Back to Employee List</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

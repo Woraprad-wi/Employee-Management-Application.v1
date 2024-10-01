@@ -1,0 +1,76 @@
+<!-- templates/employee_table.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee List</title>
+</head>
+<body>
+    <h1 style="text-align: center;">Employee List</h1>
+
+    <!-- ปุ่มลิงค์ไปยังหน้าเพิ่มข้อมูล -->
+    <div style="text-align: center; margin-bottom: 20px;">
+        <a href="{{ url_for('add_employee') }}">
+            <button>Add New Employee</button>
+        </a>
+    </div>
+
+    <!-- ฟอร์มสำหรับการค้นหา -->
+    <form action="{{ url_for('search_employee') }}" method="POST" style="text-align: center; margin-bottom: 20px;">
+        <label for="query">Search for:</label>
+        <input type="text" id="query" name="query" placeholder="Enter search term">
+
+        <label for="field">in:</label>
+        <select id="field" name="field">
+            <option value="name">Name</option>
+            <option value="position">Position</option>
+            <option value="salary">Salary</option>
+            <option value="department">Department</option>
+        </select>
+
+        <button type="submit">Search</button>
+    </form>
+
+    <table border="1" width="100%" cellpadding="5" cellspacing="0">
+        <thead>
+            <tr>
+                <th style="text-align: left;">ID</th>
+                <th style="text-align: left;">Name</th>
+                <th style="text-align: left;">Address</th>
+                <th style="text-align: left;">Manager</th>
+                <th style="text-align: left;">Status</th>
+                <th style="text-align: left;">Position</th>
+                <th style="text-align: left;">Salary</th>
+                <th style="text-align: left;">Department</th>
+                <th style="text-align: left;">Image</th>
+                <th style="text-align: left;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for employee in employees %}
+            <tr>
+                <td>{{ employee[0] }}</td> <!-- id -->
+                <td>{{ employee[1] }}</td> <!-- Name -->
+                <td>{{ employee[2] }}</td> <!-- Address -->
+                <td>{{ 'Yes' if employee[3] else 'No' }}</td> <!-- Manager -->
+                <td>{{ employee[4] }}</td> <!-- Status -->
+                <td>{{ employee[5] }}</td> <!-- Position -->
+                <td>{{ '{:,.2f}'.format(employee[6]) }}</td> <!-- Salary -->
+                <td>{{ employee[7] }}</td> <!-- Department -->
+                <td><img src="{{ employee[8] }}" alt="Employee Image" width="50"></td>
+                <td>
+                    <form action="{{ url_for('edit_employee', employee_id=employee[0]) }}" method="GET" style="display:inline;">
+                        <button type="submit">Edit</button>
+                    </form>
+                    <form action="{{ url_for('delete_employee', employee_id=employee[0]) }}" method="POST" style="display:inline;">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>                
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!-- templates/edit_employee.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <title>Edit Employee</title>
+</head>
+<body>
+    <h1 class="center-align">Edit Employee</h1>
+
+    <form action="{{ url_for('edit_employee', employee_id=employee_id) }}" method="POST" class="form-center">
+        <table cellpadding="10" class="full-width">
+            <tr>
+                <td><label for="name">Name:</label></td>
+                <td><input type="text" id="name" name="name" value="{{ employee[1] }}" required></td>
+            </tr>
+            <tr>
+                <td><label for="address">Address:</label></td>
+                <td><input type="text" id="address" name="address" value="{{ employee[2] }}" required></td>
+            </tr>
+            <tr>
+                <td><label for="manager">Manager:</label></td>
+                <td><input type="checkbox" id="manager" name="manager" value="1" {% if employee[3] %}checked{% endif %}></td>
+            </tr>
+            <tr>
+                <td><label for="status">Status:</label></td>
+                <td>
+                    <select id="status" name="status" required>
+                        <option value="Recruitment process">Recruitment Process</option>
+                        <option value="Waiting for onboarding">Waiting for Onboarding</option>
+                        <option value="In probation period">In Probation Period</option>
+                        <option value="Normal">Normal</option>
+                        <option value="Resigned">Resigned</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="position">Position:</label></td>
+                <td><input type="text" id="position" name="position" value="{{ employee[5] }}" required></td>
+            </tr>
+            <tr>
+                <td><label for="salary">Salary:</label></td>
+                <td><input type="text" id="salary" name="salary" value="{{ employee[6] }}" required></td>
+            </tr>
+            <tr>
+                <td><label for="department">Department:</label></td>
+                <td><input type="text" id="department" name="department" value="{{ employee[7] }}" required></td>
+            </tr>
+            <tr>
+                <td><label for="image">Image URL:</label></td>
+                <td><input type="text" id="image" name="image" value="{{ employee[8] }}" required></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="center-align">
+                    <button type="submit">Save</button>
+                    <a href="{{ url_for('employee_list') }}" class="margin-left-20">Back to Employee List</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
